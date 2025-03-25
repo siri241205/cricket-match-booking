@@ -1,0 +1,146 @@
+cricket booking
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Match Ticket Booking</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    font-size: 24px;
+}
+
+.matches {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.match {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 250px;
+}
+
+.match img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cart {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cricket Match Ticket Booking</h1>
+    </header>
+
+    <section class="matches">
+        <h2>Select a Match</h2>
+        <div class="match" id="match1">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.zQow90R95T_iYiWwn4CrJgHaET&pid=Api&P=0&h=180" alt="Cricket Match">
+            <h3>India vs Australia</h3>
+            <p>Date: 10th April 2025</p>
+            <p>Price: $50</p>
+            <button onclick="bookTicket('India vs Australia', 50)">Book Now</button>
+        </div>
+
+        <div class="match" id="match2">
+            <img src="https://im.indiatimes.in/content/2025/Mar/Narendra-Modi-stadium_67e27923ef3f2.jpg?w=1200&h=900&cc=1&webp=1&q=75" alt="Cricket Stadium">
+            <h3>England vs Pakistan</h3>
+            <p>Date: 15th April 2025</p>
+            <p>Price: $40</p>
+            <button onclick="bookTicket('England vs Pakistan', 40)">Book Now</button>
+        </div>
+
+        <div class="match" id="match3">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.2mkcqbPFRoxh3uAHzQqapgHaEZ&pid=Api&P=0&h=180" alt="Cricket Fans">
+            <h3>South Africa vs New Zealand</h3>
+            <p>Date: 20th April 2025</p>
+            <p>Price: $45</p>
+            <button onclick="bookTicket('South Africa vs New Zealand', 45)">Book Now</button>
+        </div>
+    </section>
+
+    <section class="cart">
+        <h2>Booking Summary</h2>
+        <ul id="ticket-list"></ul>
+        <p>Total Cost: $<span id="total-price">0.00</span></p>
+        <button onclick="checkout()">Confirm Booking</button>
+    </section>
+    <script>
+        let cart = [];
+let totalPrice = 0;
+
+function bookTicket(match, price) {
+    cart.push({ match, price });
+    totalPrice += price;
+    updateCart();
+}
+
+function updateCart() {
+    let ticketList = document.getElementById("ticket-list");
+    let totalDisplay = document.getElementById("total-price");
+
+    ticketList.innerHTML = "";
+    cart.forEach((ticket, index) => {
+        let li = document.createElement("li");
+        li.textContent = `${ticket.match} - $${ticket.price.toFixed(2)}`;
+        ticketList.appendChild(li);
+    });
+
+    totalDisplay.textContent = totalPrice.toFixed(2);
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("No tickets selected!");
+    } else {
+        alert(`Booking Confirmed! Total: $${totalPrice.toFixed(2)}`);
+        cart = [];
+        totalPrice = 0;
+        updateCart();
+    }
+}
+    </script>
+
+    
+</body>
+</html>
